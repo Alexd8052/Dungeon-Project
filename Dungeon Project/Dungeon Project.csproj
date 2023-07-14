@@ -6,7 +6,7 @@
     <RootNamespace>Dungeon_Project</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>Dungeon_Project.TestHarness</StartupObject>
+    <StartupObject>DungeonApp.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

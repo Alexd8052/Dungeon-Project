@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class Weapon
+    internal class Weapon
     {
-
+        
     }
 }

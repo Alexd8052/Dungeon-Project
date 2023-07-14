@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class Monster : Character
+    public class Monster
     {
-        
+
     }
 }

@@ -8,6 +8,13 @@ namespace DungeonLibrary
 {
     public enum Race
     {
-        None
+        //TODO Add Races
+        Race1,
+        Race2,
+        Race3,
+        Race4,
+        Race5
+
+
     }
 }
