@@ -24,12 +24,9 @@ namespace DungeonApp
             Console.Write("What is your name? ");
             string name = "The Big One";
 
-            //Block3.Enums / Block3.ClassicMonster enum for example on how to show the user a list of an enum and let them pick one.
-            //Show them the list
-            //Ask them what race they want
-            Race race = (Race)2;//pretend like they picked the number 1
+            Race race = (Race)2;
 
-            //I recommend creating a method in your Weapon.cs class to show them a list of weapons and let them pick one. "return" that weapon to the main program and use it in the Player ctor. 
+            
             #endregion
 
             #region Monster testing

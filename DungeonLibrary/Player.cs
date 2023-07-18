@@ -9,12 +9,13 @@ namespace DungeonLibrary
     public class Player : Character
     {
         public Race PlayerRace { get; set; }
+        public PlayerClasses PlayerClass { get; set; }
         public Weapon EquippedWeapon { get; set; }
         public int Score { get; set; }
         public int GoldCoins { get; set; }
 
 
-        public Player(string name, Race playerRace, Weapon equippedWeapon)
+        public Player(string name, Race playerRace, PlayerClasses playerClass, Weapon equippedWeapon)
             : base(name, 75, 5, 50)//hitchance, block, maxlife/life
         {
             PlayerRace = playerRace;
@@ -55,6 +56,10 @@ namespace DungeonLibrary
             #endregion
         }
 
+        public Player() : base("Player", 75, 5, 50)
+        {
+        }
+
         public static string GetRaceDesc(Race race)
         {
             switch (race)
@@ -73,6 +78,7 @@ namespace DungeonLibrary
                     return "";
             }
         }
+
         public override string ToString()
         {
             return base.ToString() + $"\nWeapon: \n{EquippedWeapon}\n" +

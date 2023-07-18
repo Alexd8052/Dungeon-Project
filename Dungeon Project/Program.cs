@@ -1,4 +1,5 @@
 ﻿using DungeonLibrary;
+using System;
 using System.Numerics;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
@@ -24,38 +25,21 @@ namespace DungeonApp
 
             #region Player Creation
 
+            Player player = new Player();
+
             Console.WriteLine("First, lets create your character");
 
-            Weapon[] weapons = new Weapon[]
-            {
-                new Weapon("Sword", 5, 15, 10, true, WeaponType.Sword),
-                new Weapon("Bow", 5, 8, 20, true, WeaponType.Bow),
-                new Weapon("Hammer", 12, 20, 5, true, WeaponType.Hammer),
-                new Weapon("Dagger", 5, 10, 10, false, WeaponType.Dagger),
-                new Weapon("Staff", 8, 12, 12, true, WeaponType.Staff)
-            };
+            Console.WriteLine("Choose a race: ");
+            player.PlayerRace = GetEnumChoice<Race>();
+
+            Console.WriteLine("Choose a class: ");
+            player.PlayerClass = GetEnumChoice<PlayerClasses>();
 
             Console.WriteLine("Choose a weapon: ");
+            player.EquippedWeapon = GetWeaponChoice();
 
-            foreach (WeaponType weaponType in Enum.GetValues(typeof(WeaponType)))
-            {
-                Console.WriteLine($"{(int)weaponType + 1}. {weaponType}");
-            }
-            int choice = int.Parse(Console.ReadLine());
-            if (choice >= 1 && choice <= weapons.Length)
-            {
-                Weapon chosenWeapon = weapons[choice - 1];
-                Console.WriteLine($"You have chosen the {chosenWeapon.Type}!");
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice. Please try again.");
-            }
-
-            string playerRace = GetUserRace();
-            string playerClass = GetUserClass();
-
-            Player player = new("Leeroy Jenkins", Race.Human, );
+            Console.WriteLine("Race: " + player.PlayerRace);
+            Console.WriteLine("Class: " + player.PlayerClass);
 
             player.GoldCoins = 0;
             player.Score = 0;
@@ -141,81 +125,47 @@ namespace DungeonApp
             #endregion
         }
 
-        public static string GetUserRace()
-        {
-
-            Console.WriteLine("\nChoose your race:\n" +
-            "1) Human\n" +
-            "2) Elf\n" +
-            "3) Giant\n" +
-            "4) Dwarf\n" +
-            "5) Goblin\n");
-
-            char action = Console.ReadKey(true).KeyChar;
-            Console.Clear();
-            string playerRace = "";
-            switch (action)
-            {
-                case '1':
-                    playerRace = "Human";
-                    break;
-                case '2':
-                    playerRace = "Elf";
-                    break;
-                case '3':
-                    playerRace = "Giant";
-                    break;
-                case '4':
-                    playerRace = "Dwarf";
-                    break;
-                case '5':
-                    playerRace = "Goblin";
-                    break;
-                default:
-                    Console.WriteLine("Invalid input, try again");
-                    break;
-            }
-            return playerRace;
-        }
-        public static string GetUserClass()
-        {
-            Console.WriteLine("\nChoose your class:\n" +
-            "1) Warrior\n" +
-            "2) Archer\n" +
-            "3) Guardian\n" +
-            "4) Assassin\n" +
-            "5) Mage\n");
-
-            char action = Console.ReadKey(true).KeyChar;
-            Console.Clear();
-            string playerClass = "";
-            switch (action)
-            {
-                case '1':
-                    playerClass = "Warrior";
-                    break;
-                case '2':
-                    playerClass = "Archer";
-                    break;
-                case '3':
-                    playerClass = "Guardian";
-                    break;
-                case '4':
-                    playerClass = "Assassin";
-                    break;
-                case '5':
-                    playerClass = "Mage";
-                    break;
-                default:
-                    Console.WriteLine("Invalid input, try again");
-                    break;
-            }
-            return playerClass;
-
-        }
-
-
         #region Get Room
+
+        static T GetEnumChoice<T>()
+        {
+            string[] enumNames = Enum.GetNames(typeof(T));
+
+            for (int i = 0; i < enumNames.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {enumNames[i]}");
+            }
+            int choice;
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > enumNames.Length)
+            {
+                Console.WriteLine("Invalid choice, try again.");
+            }
+            return (T)Enum.Parse(typeof(T), enumNames[choice - 1]);
+        }
+
+        static Weapon GetWeaponChoice()
+        {
+            Weapon[] weapons =
+            {
+                new Weapon("Sword", 5, 15, 5, true, WeaponType.Sword),
+                new Weapon("Bow", 5, 15, 5, true, WeaponType.Bow),
+                new Weapon("Hammer", 5, 15, 5, true, WeaponType.Hammer),
+                new Weapon("Dagger", 5, 15, 5, true, WeaponType.Dagger),
+                new Weapon("Staff", 5, 15, 5, true, WeaponType.Staff)
+            };
+
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {weapons[i].Name}");
+            }
+            int choice;
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > weapons.Length)
+            {
+                Console.WriteLine("Invalid choice, try again.");
+            }
+            return weapons[choice - 1];
+        }
+
         private static string GetRoom()
         {
             string[] rooms =
