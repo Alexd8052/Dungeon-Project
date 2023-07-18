@@ -18,6 +18,8 @@ namespace DungeonLibrary
         public Player(string name, Race playerRace, PlayerClasses playerClass, Weapon equippedWeapon)
             : base(name, 75, 5, 50)//hitchance, block, maxlife/life
         {
+            Name = name;
+            PlayerClass = playerClass;
             PlayerRace = playerRace;
             EquippedWeapon = equippedWeapon;
 
@@ -52,11 +54,10 @@ namespace DungeonLibrary
                 default:
                     break;
             }
-
             #endregion
         }
 
-        public Player() : base("Player", 75, 5, 50)
+        public Player(string name, int hitChance, int block, int maxLife) : base(name, hitChance, block, maxLife)
         {
         }
 
