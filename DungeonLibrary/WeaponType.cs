@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public enum Race
+    public enum WeaponType
     {
-        Human = 1,
-        Elf,
-        Giant,
-        Dwarf,
-        Goblin
+        Sword,
+        Bow,
+        Hammer,
+        Dagger,
+        Staff
     }
 }

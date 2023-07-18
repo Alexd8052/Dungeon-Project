@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public enum Race
+    public enum PlayerClasses
     {
-        Human = 1,
-        Elf,
-        Giant,
-        Dwarf,
-        Goblin
+        Warrior,
+        Archer,
+        Guardian,
+        Assassin,
+        Mage
     }
 }
