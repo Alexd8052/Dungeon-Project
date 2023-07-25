@@ -42,6 +42,11 @@ namespace DungeonLibrary
 
         public WeaponType Type { get; set; }
 
+        public Weapon()
+        {
+
+        }
+
         public Weapon(string name, int minDamage, int maxDamage, int bonusHitChance,
             bool isTwoHanded, WeaponType type)
         {
@@ -60,5 +65,27 @@ namespace DungeonLibrary
                    $"Bonus Hit: {BonusHitChance}%\n" +
                    $"{(IsTwoHanded ? "Two" : "One")}-Handed {Type}";
         }
+
+        public static Weapon GetWeapon(int index)
+        {
+            Weapon sword = new("Sword", 8, 12, 4, true, WeaponType.Sword);
+            Weapon bow = new("Bow", 5, 8, 10, true, WeaponType.Bow);
+            Weapon hammer = new("Hammer", 10, 15, 5, true, WeaponType.Hammer);
+            Weapon dagger = new("Dagger", 5, 10, 8, false, WeaponType.Dagger);
+            Weapon staff = new("Staff", 5, 15, 8, true, WeaponType.Staff);
+
+            List<Weapon> weapons = new List<Weapon>()
+            {
+                sword,
+                bow,
+                hammer,
+                dagger,
+                staff
+            };
+
+            Weapon currentWeapon = weapons[index];
+            return currentWeapon;
+        }
+
     }
 }

@@ -14,8 +14,10 @@ namespace DungeonApp
         {
             #region Introduction
 
-            Console.WriteLine("Welcome Newcomer! You have entered the Dungeon of Death...\n");
+            Console.WriteLine("\nWelcome Newcomer! You have entered the Dungeon of Death...\n");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Tons have tried, many have failed. Can you survive?\n\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\n\n\n ===== Press Any Key to Start ===== ");
             Console.ResetColor();
@@ -24,103 +26,69 @@ namespace DungeonApp
             #endregion
 
             #region Player Creation
-
-            Weapon w1 = new("Sword", 8, 12, 4, true, WeaponType.Sword);
-            Weapon w2 = new("Bow", 5, 8, 10, true, WeaponType.Bow);
-            Weapon w3 = new("Hammer", 10, 15, 5, true, WeaponType.Hammer);
-            Weapon w4 = new("Dagger", 5, 10, 8, false, WeaponType.Dagger);
-            Weapon w5 = new("Staff", 5, 15, 8, true, WeaponType.Staff);
-
  
 
             Console.WriteLine("First, lets create your character");
+            Console.WriteLine("What is your name?");
+            string name = Console.ReadLine();
 
-            Console.WriteLine("\nPlease choose a race:\n" +
-                        "1) Human\n" +
-                        "2) Elf\n" +
-                        "3) Giant\n" +
-                        "4) Dwarf\n" +
-                        "5) Goblin\n");
-            char race = Console.ReadKey(true).KeyChar;
-            Console.Clear();
-            switch (race)
+            bool scope = true;
+            int userInput = 0;
+            while (scope)
             {
-                case '1':
-                    Console.WriteLine("You chose Human!");
-                    break;
-                case '2':
-                    Console.WriteLine("You chose Elf!");
-                    break;
-                case '3':
-                    Console.WriteLine("You chose Giant!");
-                    break;
-                case '4':
-                    Console.WriteLine("You chose Dwarf!");
-                    break;
-                case '5':
-                    Console.WriteLine("You chose Goblin!");
-                    break;
-            }
-
-            Console.WriteLine("\nPlease choose a class:\n" +
+                Console.WriteLine("\nPlease choose a class:\n" +
                         "1) Warrior\n" +
                         "2) Archer\n" +
                         "3) Guardian\n" +
                         "4) Assassin\n" +
                         "5) Mage\n");
-            char playerClass = Console.ReadKey(true).KeyChar;
-            Console.Clear();
-            switch (playerClass)
-            {
-                case '1':
-                    Console.WriteLine("You chose Warrior!");
-                    break;
-                case '2':
-                    Console.WriteLine("You chose Archer!");
-                    break;
-                case '3':
-                    Console.WriteLine("You chose Guardian!");
-                    break;
-                case '4':
-                    Console.WriteLine("You chose Assassin!");
-                    break;
-                case '5':
-                    Console.WriteLine("You chose Mage!");
-                    break;
+
+                bool success = int.TryParse(Console.ReadLine(), out userInput);
+                if (userInput < 6 && userInput > 0 && success)
+                {
+                    scope = false;
+                }
+                Console.Clear();
             }
 
-            Console.WriteLine("\nPlease choose a weapon:\n" +
-                        "1) Sword\n" +
-                        "2) Bow\n" +
-                        "3) Hammer\n" +
-                        "4) Dagger\n" +
-                        "5) Staff\n");
-            char weapon = Console.ReadKey(true).KeyChar;
-            Console.Clear();
-            switch (weapon)
+            PlayerClasses playerClass = Player.GetClass(userInput);
+
+            bool scope2 = true;
+            int playerInput = 0;
+            while (scope2)
             {
-                case '1':
-                    Console.WriteLine("You chose Sword!");
-                    
-                    break;
-                case '2':
-                    Console.WriteLine("You chose Bow!");
-                    break;
-                case '3':
-                    Console.WriteLine("You chose Hammer!");
-                    break;
-                case '4':
-                    Console.WriteLine("You chose Dagger!");
-                    break;
-                case '5':
-                    Console.WriteLine("You chose Staff!");
-                    break;
+                Console.WriteLine("\nPlease choose a race:\n" +
+                        "1) Human\n" +
+                        "2) Elf\n" +
+                        "3) Giant\n" +
+                        "4) Dwarf\n" +
+                        "5) Goblin\n");
+
+                bool success = int.TryParse(Console.ReadLine(), out playerInput);
+                if (playerInput < 6 && playerInput > 0 && success)
+                {
+                    scope2 = false;
+                }
+                Console.Clear();
             }
 
-            Player player = new Player("Player", race, playerClass, weapon);
+            Race playerRace = Player.GetRace(playerInput);
 
+            
+
+            Weapon equippedWeapon = Weapon.GetWeapon(0);
+
+            Player player = new Player(name, playerRace, playerClass, equippedWeapon);
             player.GoldCoins = 0;
             player.Score = 0;
+
+            Console.Clear();
+            Console.WriteLine($"\n\n\n\nWelcome {player.Name} the {player.PlayerClass}! Best of Luck!\n" +
+               $"(press any button)");
+            Console.ReadKey(true);
+            Console.Clear();
+            Console.ResetColor();
+
             #endregion
 
             bool quit = false;
@@ -193,11 +161,11 @@ namespace DungeonApp
 
             #region Exit
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("You defeated " + player.Score +
+            Console.WriteLine("\nYou defeated " + player.Score +
                 " monster" + (player.Score == 1 ? "." : "s"));
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("You earned " + player.GoldCoins + " gold coin" + (player.GoldCoins == 1 ? "." : "s"));
+            Console.WriteLine("\nYou earned " + player.GoldCoins + " gold coin" + (player.GoldCoins == 1 ? "." : "s"));
             Console.ResetColor();
 
             #endregion

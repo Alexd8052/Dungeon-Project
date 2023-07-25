@@ -54,7 +54,7 @@ namespace DungeonLibrary
                 Console.ResetColor();
                 Console.ForegroundColor= ConsoleColor.DarkYellow;
                 Console.WriteLine("You earned 1 gold coin\n");
-                Console.WriteLine("Gold Coins: " + player.GoldCoins + "\n\n");
+                Console.WriteLine("\n\nGold Coins: " + player.GoldCoins + "\n\n");
                 Console.ResetColor();
 
                 return true;
